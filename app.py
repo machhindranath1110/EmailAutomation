@@ -317,10 +317,10 @@ Best regards,
 ], fluid=True)
 
 # ✅ Show the correct layout (License Key Prompt or Main App)
-if check_license():
-    app.layout = app_layout
-else:
-    app.layout = license_layout
+# if check_license():
+#     app.layout = app_layout
+# else:
+#     app.layout = license_layout
 
 # ✅ Callback to verify and save the license key
 @app.callback(
