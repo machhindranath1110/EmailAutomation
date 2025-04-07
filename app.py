@@ -1,4 +1,3 @@
-import os
 import webbrowser
 import time
 import dash
@@ -11,55 +10,13 @@ import smtplib
 import xlsxwriter
 from email.message import EmailMessage
 
-# ✅ List of valid license keys
-VALID_KEYS = {"INN123", "XYZ123", "MNO123"}  # Add more keys here
-
-# ✅ Path to store the license key
-LICENSE_FILE = "license.txt"
-
-# ✅ Function to check the stored license key
-def check_license():
-    if os.path.exists(LICENSE_FILE):
-        with open(LICENSE_FILE, "r") as file:
-            saved_key = file.read().strip()
-            return saved_key in VALID_KEYS  # ✅ Check if key is valid
-    return False
-
-# ✅ Function to save the license key
-def save_license(key):
-    with open(LICENSE_FILE, "w") as file:
-        file.write(key)
-
-
 # Initialize Dash App
+# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"])
 
-# ✅ License Key Layout (Shown only if key is missing)
-# ✅ License Key Layout (Shown only if key is missing)
-# license_layout = dbc.Container([
-#     dcc.Location(id="url", refresh=True),  # Keeps track of the URL
-#     html.Div(id="redirect-script"),  # ✅ This will hold the JavaScript refresh script
-#     dbc.Row(
-#         dbc.Col(
-#             html.Div([
-#                 html.H2("Enter License Key", className="text-center mb-4"),
-#                 dbc.Input(id="license-key", type="text", placeholder="Enter your License Key", className="mb-2"),
-#                 dbc.Button("Activate", id="activate-btn", color="success", className="btn-block"),
-#                 html.Div(id="license-status", className="mt-2 text-center", style={"fontWeight": "bold"})
-#             ], style={
-#                 "textAlign": "center", "padding": "20px", "width": "50%", "margin": "auto",
-#                 "border": "1px solid #ddd", "borderRadius": "8px", "boxShadow": "2px 2px 10px rgba(0,0,0,0.1)"
-#             }),
-#             width=12
-#         )
-#     )
-# ], fluid=True)
 
-
-
-
-# Application Layout
-app_layout = dbc.Container([
+# Layout
+app.layout = dbc.Container([
         dbc.Row(
         dbc.Col(
             html.Div(
@@ -315,40 +272,6 @@ Best regards,
         )
     )
 ], fluid=True)
-
-# ✅ Show the correct layout (License Key Prompt or Main App)
-# if check_license():
-#     app.layout = app_layout
-# else:
-#     app.layout = license_layout
-
-# ✅ Callback to verify and save the license key
-@app.callback(
-    [Output("license-status", "children"),
-     Output("license-status", "style"),
-     Output("activate-btn", "disabled"),
-     Output("redirect-script", "children")],  # ✅ JavaScript trigger for page refresh
-    Input("activate-btn", "n_clicks"),
-    State("license-key", "value"),
-)
-def activate_license(n_clicks, entered_key):
-    if n_clicks and entered_key:
-        if entered_key in VALID_KEYS:
-            save_license(entered_key)  # ✅ Save the key
-            return (
-                "✅ License Activated! Restarting...",
-                {"color": "green"},
-                True,
-                html.Script("window.location.reload();")  # ✅ Forces a full page reload
-            )
-        else:
-            return (
-                "❌ Invalid License Key! Try Again.",
-                {"color": "red"},
-                False,
-                dash.no_update  # ❌ Prevents page reload if the key is wrong
-            )
-    return "", {}, False, dash.no_update
 
 
 # Function to Read Excel File
