@@ -36,24 +36,24 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, "https://c
 
 # ✅ License Key Layout (Shown only if key is missing)
 # ✅ License Key Layout (Shown only if key is missing)
-license_layout = dbc.Container([
-    dcc.Location(id="url", refresh=True),  # Keeps track of the URL
-    html.Div(id="redirect-script"),  # ✅ This will hold the JavaScript refresh script
-    dbc.Row(
-        dbc.Col(
-            html.Div([
-                html.H2("Enter License Key", className="text-center mb-4"),
-                dbc.Input(id="license-key", type="text", placeholder="Enter your License Key", className="mb-2"),
-                dbc.Button("Activate", id="activate-btn", color="success", className="btn-block"),
-                html.Div(id="license-status", className="mt-2 text-center", style={"fontWeight": "bold"})
-            ], style={
-                "textAlign": "center", "padding": "20px", "width": "50%", "margin": "auto",
-                "border": "1px solid #ddd", "borderRadius": "8px", "boxShadow": "2px 2px 10px rgba(0,0,0,0.1)"
-            }),
-            width=12
-        )
-    )
-], fluid=True)
+# license_layout = dbc.Container([
+#     dcc.Location(id="url", refresh=True),  # Keeps track of the URL
+#     html.Div(id="redirect-script"),  # ✅ This will hold the JavaScript refresh script
+#     dbc.Row(
+#         dbc.Col(
+#             html.Div([
+#                 html.H2("Enter License Key", className="text-center mb-4"),
+#                 dbc.Input(id="license-key", type="text", placeholder="Enter your License Key", className="mb-2"),
+#                 dbc.Button("Activate", id="activate-btn", color="success", className="btn-block"),
+#                 html.Div(id="license-status", className="mt-2 text-center", style={"fontWeight": "bold"})
+#             ], style={
+#                 "textAlign": "center", "padding": "20px", "width": "50%", "margin": "auto",
+#                 "border": "1px solid #ddd", "borderRadius": "8px", "boxShadow": "2px 2px 10px rgba(0,0,0,0.1)"
+#             }),
+#             width=12
+#         )
+#     )
+# ], fluid=True)
 
 
 
